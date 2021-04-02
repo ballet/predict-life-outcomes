@@ -1,0 +1,17 @@
+[![ballet](https://img.shields.io/static/v1?label=built%20with&message=ballet&color=FCDD35)](https://ballet.github.io)
+<a href="https://mybinder.org/v2/gh/HDI-Project/ballet-fragile-families/master?urlpath=lab" target="_blank" rel="nofollow"><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
+
+# Fragile Families Collaboration
+
+This is a collaborative predictive modeling project built on the [ballet framework](https://ballet.github.io).
+
+## Join the collaboration
+
+Are you interested in joining the collaboration?
+
+- Read the [Ballet Contributor Guide](https://ballet.github.io/ballet/contributor_guide.html)
+- Read the [Ballet Feature Engineering Guide](https://ballet.github.io/ballet/feature_engineering_guide.html)
+- Browse the currently accepted features in the contributed features
+    directory ([`src/fragile_families/features/contrib`](src/fragile_families/features/contrib))
+- Launch an interactive Jupyter Lab session to hack on this repository:
+    <a href="https://mybinder.org/v2/gh/HDI-Project/ballet-fragile-families/master?urlpath=lab" target="_blank" rel="nofollow" ><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
