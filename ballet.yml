@@ -7,7 +7,7 @@ problem:
   problem_type: regression
   problem_type_details:
     scorer: neg_mean_squared_error
-    classification_type: 
+    classification_type:
 contrib:
   module_name: fragile_families.features.contrib
   module_path: src/fragile_families/features/contrib
@@ -23,23 +23,24 @@ github:
   auto_merge_accepted_features: yes
   auto_close_rejected_features: yes
 data:
-  s3_bucket:
-  s3_bucket_region:
+  s3_bucket: mit-dai-ballet-ff
+  s3_bucket_region: us-east-1
   train: data/train
+  leaderboard: data/leaderboard
   entities_table_name: entities
   targets_table_name: targets
   tables:
     -
       name: entities
-      path: entities.csv
-      pd_read_kwargs:
-        index_col: 0
-        header: 0
-        sep: ","
+      path: entities.parquet
+      pandas:
+        read_method: read_parquet
+        read_kwargs:
+          engine: pyarrow
     -
       name: targets
-      path: targets.csv
-      pd_read_kwargs:
-        index_col: 0
-        header: 0
-        sep: ","
+      path: targets.parquet
+      pandas:
+        read_method: read_parquet
+        read_kwargs:
+          engine: pyarrow
