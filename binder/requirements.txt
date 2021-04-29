@@ -7,5 +7,5 @@ jupyterlab ~= 2.0
 # lab extension
 ballet-assemble ~= 0.8
 
-# additional user requirements
--r requirements-notebook.txt
+# additional user requirements - not sure why this works, given pwd
+-r ../requirements-notebook.txt
