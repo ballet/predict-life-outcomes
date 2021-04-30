@@ -1,8 +1,28 @@
 from typing import Tuple
 
 import pandas as pd
+from ballet.exc import BalletError
 from ballet.project import load_config
-from funcy import some, where
+from ballet.util.log import logger
+from funcy import decorator, some, where
+
+
+@decorator
+def needs_credentials(call):
+    try:
+        return call()
+    except Exception as e:
+        if 'NoCredentialsError' in e.__class__.__name__ \
+                or 'Forbidden' in str(e):
+            logger.debug(f'Caught {e} when trying to load data')
+            msg = (
+                'An error occurred trying to access fragile-families data. '
+                'Access to this dataset is restricted. Make sure you follow ' 'the steps at '
+                'https://github.com/HDI-Project/ballet-fragile-families#data-access'
+                ' to get access, or ask in the project chat if you are having '
+                'any trouble.'
+            )
+            raise BalletError(msg) from None
 
 
 def load_table_from_config(input_dir, table_config) -> pd.DataFrame:
@@ -12,6 +32,7 @@ def load_table_from_config(input_dir, table_config) -> pd.DataFrame:
     return method(path, **kwargs)
 
 
+@needs_credentials
 def load_data(
     input_dir=None, split='train',
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
@@ -42,6 +63,7 @@ def load_data(
     return X, y
 
 
+@needs_credentials
 def load_background() -> pd.DataFrame:
     """Load all background data as a single dataframe"""
     config = load_config()
