@@ -1,11 +1,12 @@
+import logging
 from typing import Tuple
 
 import pandas as pd
 from ballet.exc import BalletError
 from ballet.project import load_config
-from ballet.util.log import logger
 from funcy import decorator, some, where
 
+logger = logging.getLogger(__name__)
 
 @decorator
 def needs_credentials(call):
