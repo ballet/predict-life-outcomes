@@ -26,9 +26,17 @@ The data underlying the Fragile Families Challenge, which we are using in this c
 
 If you are authorized to access the data, you can do so as follows:
 
-```
+```python
 from ballet import b
 X_df, y_df = b.api.load_data()
 ```
 
-Your AWS access key ID/secret will be automatically detected from standard locations by the data loading in order to provide you access to the data.
+Your AWS access key ID/secret will be automatically detected from standard locations (such as [environment variables](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#environment-variables) or [credentials files](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#shared-credentials-file)) by the data loading in order to provide you access to the data.
+
+For example,
+
+```python
+import os
+os.environ['AWS_ACCESS_KEY_ID'] = 'your access key id
+os.environ['AWS_SECRET_ACCESS_KEY'] = 'your secret access key'
+```
