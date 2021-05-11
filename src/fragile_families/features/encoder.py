@@ -1,4 +1,5 @@
-from ballet.eng.misc import IdentityTransformer
+from ballet.eng.misc import ColumnSelector
+from ballet.eng.missing import NullFiller
 
 
 def get_target_encoder():
@@ -7,4 +8,7 @@ def get_target_encoder():
     Returns:
         transformer-like
     """
-    return IdentityTransformer()
+    return [
+        ColumnSelector('materialHardship'),
+        NullFiller(),
+    ]
