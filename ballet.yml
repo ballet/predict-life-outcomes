@@ -16,6 +16,7 @@ validation:
   feature_api_validator: ballet.validation.feature_api.validator.FeatureApiValidator
   feature_accepter: ballet.validation.feature_acceptance.validator.GFSSFAccepter
   feature_pruner: ballet.validation.feature_pruning.validator.GFSSFPruner
+  split: leaderboard
 github:
   github_owner: HDI-Project
   remote: origin
@@ -25,8 +26,10 @@ github:
 data:
   s3_bucket: mit-dai-ballet-ff
   s3_bucket_region: us-east-1
-  train: data/train
-  leaderboard: data/leaderboard
+  splits:
+    train: data/train
+    leaderboard: data/leaderboard
+    test: data/test
   entities_table_name: entities
   targets_table_name: targets
   tables:

@@ -24,6 +24,8 @@ def needs_credentials(call):
                 'any trouble.'
             )
             raise BalletError(msg) from None
+        else:
+            raise
 
 
 def load_table_from_config(input_dir, table_config) -> pd.DataFrame:
@@ -55,7 +57,7 @@ def load_data(
 
     if input_dir is None:
         bucket = config.data.s3_bucket
-        split_path = config.data.get(split)
+        split_path = config.data.splits.get(split)
         input_dir = f's3://{bucket}/{split_path}'
 
     X = load_table_from_config(input_dir, entities_config)
