@@ -1,5 +1,6 @@
 from ballet.eng.misc import ColumnSelector
 from ballet.eng.missing import NullFiller
+from ballet.transformer import make_robust_transformer_pipeline
 
 
 def get_target_encoder():
@@ -8,7 +9,7 @@ def get_target_encoder():
     Returns:
         transformer-like
     """
-    return [
+    return make_robust_transformer_pipeline([
         ColumnSelector('materialHardship'),
         NullFiller(),
-    ]
+    ])
