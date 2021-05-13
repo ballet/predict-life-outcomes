@@ -24,7 +24,7 @@ validation:
             threshold: 0.05
         - name: ballet.validation.feature_acceptance.validator.MutualInformationAccepter
           params:
-            threshold: 0.05
+            threshold: 0.01
             handle_nan_targets: ignore
   feature_pruner: ballet.validation.feature_pruning.validator.NoOpPruner
   split: leaderboard
