@@ -1,2 +1,4 @@
 matplotlib
 seaborn
+ffmetadata-py
+tqdm
