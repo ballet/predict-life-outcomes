@@ -124,6 +124,13 @@ metadata.search({'name': 'label', 'op': 'like', 'val': '%school%'})
 # can use metadata.searchinfo to combine the two methods
 ```
 
+## Feature validation
+
+In this project, feature contributions are [validated](https://ballet.github.io/ballet/contributor_guide.html#understanding-validation-results) to ensure that they are positively contributing to our shared feature engineering pipeline. One part of this validation is called "feature acceptance" validation, that is, does the performance of our ML pipeline improve when the new feature is added? We run the feature through two feature accepters: the [`MutualInformationAccepter`](https://ballet.github.io/ballet/api/ballet.validation.feature_acceptance.validator.html#ballet.validation.feature_acceptance.validator.MutualInformationAccepter) and the [`VarianceThresholdAccepter`](https://ballet.github.io/ballet/api/ballet.validation.feature_acceptance.validator.html#ballet.validation.feature_acceptance.validator.VarianceThresholdAccepter). Based on the parameters set in our [ballet.yml](ballet.yml#L17) configuration file, a feature definition is accepted if it meets two criteria:
+
+- the variance of each its feature column values is greater than a threshold (set to 0.05), i.e. `Var(z_i) > 0.05 ∀ z_i ∈ z` where `z_i` are columns of feature `z`.
+- the mutual information of the feature values with the target on the held out leaderboard dataset split is greater than a threshold (set to 0.01), i.e. `I(z ; y) > 0.01`.
+
 ## Additional resources
 
 * [FF Data and Documentation](https://fragilefamilies.princeton.edu/documentation)
