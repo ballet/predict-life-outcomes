@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
     """Get metadata on each variable"""
-    if isinstance(str, variables):
+    if isinstance(variables, str):
         variables = [variables]
     records = []
     for var in tqdm(variables):
