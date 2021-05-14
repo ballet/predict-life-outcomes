@@ -6,12 +6,22 @@ requirements = [
     'fsspec[s3]',
 ]
 
+extras = {
+    'analysis': [
+        'ffmetadata-py',
+        'funcy',
+        'pandas',
+        'tqdm',
+    ],
+}
+
 setup(
     name='fragile_families',
     version='0.1.0-dev',
     packages=find_packages(where='src', include=('fragile_families', 'fragile_families.*')),
     package_dir={'': 'src'},
     install_requires=requirements,
+    extras_require=extras,
 
     # metadata
     author='Micah Smith',

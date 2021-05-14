@@ -113,11 +113,26 @@ Predictor variables are identified by a *prefix* and a *question number*. Prefix
 1. `kind`: Questions asked of the `kind`ergarten teacher
 1. `t5`: Questions asked of the `t`eacher in wave `5`.
 
+### Metadata search
+
+We wrap the ffmetadata API for our own use in feature development. See [here](https://github.com/fragilefamilieschallenge/metadata_app/blob/master/README.md#filter-specification) for details on the filter operations.
+
+```python
+import fragile_families.analysis.metadata as metadata
+metadata.info('m1a4')
+metadata.search({'name': 'label', 'op': 'like', 'val': '%school%'})
+# can use metadata.searchinfo to combine the two methods
+```
 
 ## Additional resources
 
 * [FF Data and Documentation](https://fragilefamilies.princeton.edu/documentation)
 * [FF metadata homepage](http://metadata.fragilefamilies.princeton.edu/)
+    * To see detailed metadata for a variable, can use the variables endpoint in your browser, like so (just replace the variable name):
+
+      ```
+      http://metadata.fragilefamilies.princeton.edu/variables/cf1cohm
+      ```
 * [metadata_app](https://github.com/fragilefamilieschallenge/metadata_app/blob/master/README.md)
 * [ffmetadata-py](https://github.com/fragilefamilieschallenge/ffmetadata-py)
 * [Machine readable codebook](https://www.fragilefamilieschallenge.org/machine-readable-fragile-families-codebook/)
