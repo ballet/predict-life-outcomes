@@ -6,13 +6,18 @@ import pandas as pd
 from tqdm import tqdm
 
 
+@funcy.memoize
+def _select(var):
+    return ff.select(var)
+
+
 def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
     """Get metadata on each variable"""
     if isinstance(variables, str):
         variables = [variables]
     records = []
     for var in tqdm(variables):
-        records.append(ff.select(var))
+        records.append(_select(var))
     return pd.DataFrame.from_records(records)
 
 
