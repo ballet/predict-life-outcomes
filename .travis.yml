@@ -17,8 +17,8 @@ matrix:
       env: BALLET_CHECK_FEATURE_API=true
     - name: "Feature acceptance evaluation"
       env: BALLET_EVALUATE_FEATURE_ACCEPTANCE=true
-    - name: "Feature pruning evaluation"
-      env: BALLET_EVALUATE_FEATURE_PRUNING=true
+    # - name: "Feature pruning evaluation"
+    #   env: BALLET_EVALUATE_FEATURE_PRUNING=true
 
 install:
   - pip install --upgrade pip
