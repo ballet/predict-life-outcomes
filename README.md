@@ -53,6 +53,16 @@ os.environ['AWS_ACCESS_KEY_ID'] = 'your access key id'
 os.environ['AWS_SECRET_ACCESS_KEY'] = 'your secret access key'
 ```
 
+Alternatively, if you are working locally, you can create a new AWS profile in `~/.aws/credentials`:
+
+```
+[bff]
+aws_access_key_id = your-access-key-id
+aws_secret_access_key = your-secret-access-key
+```
+
+Then you can use this profile when you are developing features for this project, by exporting the environment variable `AWS_PROFILE=bff` (or using the `os.environ` approach similar to above).
+
 ## Data documentation
 
 The full challenge dataset contains a "background" table of 4,242 rows (one per child in the training set) and 12,942 columns.
