@@ -31,9 +31,9 @@ validation:
 github:
   github_owner: HDI-Project
   remote: origin
-  pruning_action: commit_to_master
+  pruning_action: no_action
   auto_merge_accepted_features: yes
-  auto_close_rejected_features: yes
+  auto_close_rejected_features: no
 data:
   s3_bucket: mit-dai-ballet-ff
   s3_bucket_region: us-east-1
