@@ -1,6 +1,7 @@
 [![ballet](https://img.shields.io/static/v1?label=built%20with&message=ballet&color=FCDD35)](https://ballet.github.io)
 <a href="https://mybinder.org/v2/gh/HDI-Project/ballet-fragile-families/master?urlpath=lab" target="_blank" rel="nofollow"><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
-[![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)](https://join.slack.com/share/zt-r6u5ohtf-V40eunINB56ZD2Qd3b1L1w) [![Join the chat at https://gitter.im/ballet-project/fragile-families](https://badges.gitter.im/ballet-project/fragile-families.svg)](https://gitter.im/ballet-project/fragile-families?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)](https://join.slack.com/share/zt-r6u5ohtf-V40eunINB56ZD2Qd3b1L1w)
+[![Join the chat at https://gitter.im/ballet-project/fragile-families](https://badges.gitter.im/ballet-project/fragile-families.svg)](https://gitter.im/ballet-project/fragile-families?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Fragile Families Collaboration
 
@@ -141,6 +142,17 @@ In this project, feature contributions are [validated](https://ballet.github.io/
 
 - the variance of each its feature column values is greater than a threshold (set to 0.05), i.e. `Var(z_i) > 0.05 ∀ z_i ∈ z` where `z_i` are columns of feature `z`.
 - the mutual information of the feature values with the target on the held out leaderboard dataset split is greater than a threshold (set to 0.001), i.e. `I(z ; y) > 0.001`.
+
+## Discussion and help
+
+Want to chat about the project, compare ideas, or debug features with other collaborators? Join either of our two chat rooms:
+
+* Slack: [![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)](https://join.slack.com/share/zt-r6u5ohtf-V40eunINB56ZD2Qd3b1L1w) (forgive me if the invite link is ever temporarily expired)
+* Gitter: [![Join the chat at https://gitter.im/ballet-project/fragile-families](https://badges.gitter.im/ballet-project/fragile-families.svg)](https://gitter.im/ballet-project/fragile-families?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+If you think a question might have been answered before, check out the [Ballet FAQ](https://ballet.github.io/ballet/faq.html).
+
+If you think you found a bug with Ballet, please [open an issue](https://github.com/ballet/ballet/issues/new) and mention that you are working on the ballet-fragile-families project.
 
 ## Additional resources
 
