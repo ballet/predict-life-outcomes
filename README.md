@@ -1,6 +1,6 @@
 [![ballet](https://img.shields.io/static/v1?label=built%20with&message=ballet&color=FCDD35)](https://ballet.github.io)
 <a href="https://mybinder.org/v2/gh/HDI-Project/ballet-fragile-families/master?urlpath=lab" target="_blank" rel="nofollow"><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
-[![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)](https://join.slack.com/share/zt-r6u5ohtf-V40eunINB56ZD2Qd3b1L1w)
+[![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)](https://join.slack.com/share/zt-r6u5ohtf-V40eunINB56ZD2Qd3b1L1w) [![Join the chat at https://gitter.im/ballet-project/fragile-families](https://badges.gitter.im/ballet-project/fragile-families.svg)](https://gitter.im/ballet-project/fragile-families?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Fragile Families Collaboration
 
