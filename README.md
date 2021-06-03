@@ -37,7 +37,7 @@ You must apply to Princeton's Office of Population Research (OPR) for access to 
 
 > :envelope: [Follow instructions here to apply for access](https://docs.google.com/document/d/18uHdSS5NFNKmbYZvulsSkpgiA2NV9APmYQMgsQfI1_k/edit?usp=sharing)
 
-Once you have been granted access to the data from Princeton's Office of Population Research (OPR), you must register with us to join the collaboration. (This is step 7 in the instructions above, so don't repeat it if you already filled out the form.)
+You must register with us to join the collaboration, once you have been granted access to the data from Princeton OPR (or if you had already had access to the data from prior research). (This is step 7 in the instructions above, so don't repeat it if you already filled out the form.)
 
 > :raised_hand: [Register here!](https://forms.gle/8MDLdZTftySqvn4e8)
 
