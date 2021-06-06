@@ -1,6 +1,4 @@
-from ballet.eng.misc import ColumnSelector
-from ballet.eng.missing import NullFiller
-from ballet.transformer import make_robust_transformer_pipeline
+from ballet.eng import SimpleFunctionTransformer
 
 
 def get_target_encoder():
@@ -9,7 +7,6 @@ def get_target_encoder():
     Returns:
         transformer-like
     """
-    return make_robust_transformer_pipeline([
-        ColumnSelector('materialHardship'),
-        NullFiller(),
-    ])
+    return SimpleFunctionTransformer(
+        lambda df: df['materialHardship'].fillna(0)
+    )
