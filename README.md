@@ -28,7 +28,7 @@ Are you interested in joining the collaboration?
 
 ## Data access
 
-The data underlying the Fragile Families Challenge, which we are using in this collaboration, is sensitive and requires registration to access. More details are upcoming about how to access this data.
+The data underlying the Fragile Families Challenge, which we are using in this collaboration, is sensitive and requires registration to access.
 
 If you are already authorized to access the data, you can look over [Data Documentation](#data-documentation) below.
 
@@ -37,6 +37,8 @@ If you are already authorized to access the data, you can look over [Data Docume
 You must apply to Princeton's Office of Population Research (OPR) for access to the Fragile Families Challenge dataset.
 
 > :envelope: [Follow instructions here to apply for access](https://docs.google.com/document/d/18uHdSS5NFNKmbYZvulsSkpgiA2NV9APmYQMgsQfI1_k/edit?usp=sharing)
+
+**The Fragile Families Challenge dataset contains sensitive information. You should keep this dataset secure and protect the privacy of the individuals, and abide by the data access agreement which requires you not to share your copy of the dataset.**
 
 You must register with us to join the collaboration, once you have been granted access to the data from Princeton OPR (or if you had already had access to the data from prior research). (This is step 7 in the instructions above, so don't repeat it if you already filled out the form.)
 
