@@ -11,6 +11,10 @@ def _select(var):
     return ff.select(var)
 
 
+def clean_garbage_chars(s: Optional[str]) -> Optional[str]:
+    return ''.join(c for c in s if c.isascii()) if s else s
+
+
 def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
     """Get metadata on each variable
 
@@ -21,7 +25,10 @@ def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
     records = []
     for var in tqdm(variables):
         records.append(_select(var))
-    return pd.DataFrame.from_records(records)
+    result = pd.DataFrame.from_records(records)
+    for col in ['probe', 'qtext']:
+        result[col] = result[col].apply(clean_garbage_chars)
+    return result
 
 
 def search(query: Union[Dict, List[Dict]]) -> List:
