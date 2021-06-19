@@ -12,7 +12,10 @@ def _select(var):
 
 
 def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
-    """Get metadata on each variable"""
+    """Get metadata on each variable
+
+    An explanation of the resulting metadata can be found here: http://metadata.fragilefamilies.princeton.edu/about
+    """  # noqa
     if isinstance(variables, str):
         variables = [variables]
     records = []

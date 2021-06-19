@@ -129,7 +129,7 @@ Predictor variables are identified by a *prefix* and a *question number*. Prefix
 
 ### Metadata search
 
-We wrap the ffmetadata API for our own use in feature development. See [here](https://github.com/fragilefamilieschallenge/metadata_app/blob/master/README.md#filter-specification) for details on the filter operations.
+We wrap the ffmetadata API for our own use in feature development. See [here](https://github.com/fragilefamilieschallenge/metadata_app/blob/master/README.md#filter-specification) for details on the filter operations and see [here](http://metadata.fragilefamilies.princeton.edu/about) for an explanation of the resulting metadata.
 
 ```python
 import fragile_families.analysis.metadata as metadata
