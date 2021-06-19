@@ -1,12 +1,12 @@
-from typing import Collection, Dict, List, Union
+from typing import Collection, Dict, List, Optional, Union
 
-import funcy
 import ff
 import pandas as pd
+from funcy import memoize
 from tqdm import tqdm
 
 
-@funcy.memoize
+@memoize
 def _select(var):
     return ff.select(var)
 
@@ -31,7 +31,7 @@ def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
     return result
 
 
-def search(query: Union[Dict, List[Dict]]) -> List:
+def search(query: Union[Dict, List[Dict]]) -> List[str]:
     """Search for variables that appear in FFC
 
     The query API is identical to https://github.com/fragilefamilieschallenge/ffmetadata-py. The addition here is that we add a filter to ever query to require that the variable appears in FFC. So users should not pass this filter themselves.
@@ -46,7 +46,7 @@ def search(query: Union[Dict, List[Dict]]) -> List:
            {'name': 'survey', 'op': 'eq', 'val': 'Father'},
            {'name': 'wave', 'op': 'eq', 'val': 'Baseline'},
        ])
-    """
+    """  # noqa
     if isinstance(query, dict):
         query = [query]
     query = [
@@ -56,5 +56,17 @@ def search(query: Union[Dict, List[Dict]]) -> List:
     return ff.search(query)
 
 
-searchinfo = funcy.compose(info, search)
-"""Search and then get info on search results"""
+def searchinfo(
+    query: Union[Dict, List[Dict]],
+    limit: Optional[int] = None
+) -> pd.DataFrame:
+    """Search and then get info on search results
+
+    See metadata.search for details on search queries.
+
+    Args:
+        query: query for metadata.search
+        limit: max number of items to return (defaults to all items)
+    """
+    variables = search(query)[:limit]
+    return info(variables)
