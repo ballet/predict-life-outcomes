@@ -25,6 +25,9 @@ install:
   - pip install invoke
   - invoke install
 
+before_script:
+  - . ./bin/unscr.sh
+
 script:
   - printenv | grep TRAVIS | sort
   - pip freeze
