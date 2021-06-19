@@ -1,9 +1,12 @@
+import logging
 from typing import Collection, Dict, List, Optional, Union
 
 import ff
 import pandas as pd
 from funcy import memoize
 from tqdm import tqdm
+
+logger = logging.getLogger(__name__)
 
 
 @memoize
@@ -58,7 +61,7 @@ def search(query: Union[Dict, List[Dict]]) -> List[str]:
 
 def searchinfo(
     query: Union[Dict, List[Dict]],
-    limit: Optional[int] = None
+    limit: Optional[int] = 30,
 ) -> pd.DataFrame:
     """Search and then get info on search results
 
@@ -66,7 +69,13 @@ def searchinfo(
 
     Args:
         query: query for metadata.search
-        limit: max number of items to return (defaults to all items)
+        limit: max number of items to return, set to None to see info for all
+            items (defaults to 30)
     """
-    variables = search(query)[:limit]
-    return info(variables)
+    variables = search(query)
+    if limit and limit < len(variables):
+        logger.info(
+            f'Returning info for {limit} variables (out of '
+            f'{len(variables)} found); pass limit=None to see info for all '
+            'variables.')
+    return info(variables[:limit])
