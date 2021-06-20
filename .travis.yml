@@ -27,8 +27,8 @@ install:
 
 before_script:
   - . ./bin/unscr.sh
-
-script:
   - printenv | grep TRAVIS | sort
   - pip freeze
+
+script:
   - ballet validate
