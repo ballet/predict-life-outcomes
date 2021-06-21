@@ -1,12 +1,18 @@
 import logging
 from typing import Tuple
 
+import fsspec
 import pandas as pd
 from ballet.exc import BalletError
 from ballet.project import load_config
 from funcy import decorator, some, where
 
 logger = logging.getLogger(__name__)
+
+
+def s3():
+    return fsspec.filesystem('s3')
+
 
 @decorator
 def needs_credentials(call):
@@ -73,3 +79,15 @@ def load_background() -> pd.DataFrame:
     bucket = config.data.tables.s3_bucket
     path = f's3://{bucket}/raw/background.csv.gz'
     return pd.read_csv(path, compression='gzip', index_col='challengeID')
+
+
+def load_codebook() -> pd.DataFrame:
+    """Load machine readable codebook from JSON document
+
+    See also:
+        https://www.fragilefamilieschallenge.org/machine-readable-fragile-families-codebook/
+    """  # noqa
+    config = load_config()
+    bucket = config.data.tables.s3_bucket
+    path = f's3://{bucket}/metadata/codebook.json'
+    return pd.read_json(path, orient='records').set_index('code')

@@ -96,13 +96,20 @@ X_df, y_df = b.api.load_data()
 
 The other half of the rows are reserved for the "leaderboard" and "test" splits. We will use the leaderboard split to validate feature contributions. We will not look at the test split until the end of the collaboration.
 
+If you'd like, you can load the full "background" dataset which includes the rows from the train, leaderboard, and test splits combined, but excluding the target columns.
+
+```python
+from fragile_families.load_data import load_background
+background_df = load_background()
+```
+
 ### Background variables
 
 (This section is adapted from [here](https://www.fragilefamilieschallenge.org/apply/))
 
 To use the data, it may be useful to know something about what each variable (column) represents. (See also the [full documentation](http://www.fragilefamilies.princeton.edu/documentation).)
 
-Waves and child ages
+#### Waves and child ages
 
 The background variables were collected in 5 waves.
 
@@ -113,7 +120,8 @@ The background variables were collected in 5 waves.
 * Wave 5: Collected at approximately child age 9
 
 Note that wave numbers are not the same as child ages. The variable names and survey documentation are organized by wave number.
-Variable naming conventions
+
+#### Variable naming conventions
 
 Predictor variables are identified by a *prefix* and a *question number*. Prefixes the survey in which a question was collected. This is useful because the documentation is organized by survey. For instance the variable `m1a4` refers to the `m`other interview in wave `1`, question `a4`.
 
@@ -127,9 +135,18 @@ Predictor variables are identified by a *prefix* and a *question number*. Prefix
 1. `kind`: Questions asked of the `kind`ergarten teacher
 1. `t5`: Questions asked of the `t`eacher in wave `5`.
 
+### Full codebook
+
+We expose the full [machine-readable codebook](https://www.fragilefamilieschallenge.org/machine-readable-fragile-families-codebook/) which you can use during feature development.
+
+```python
+from fragile_families.load_data import load_codebook
+codebook_df = load_codebook()
+```
+
 ### Metadata search
 
-We wrap the ffmetadata API for our own use in feature development. See [here](https://github.com/fragilefamilieschallenge/metadata_app/blob/master/README.md#filter-specification) for details on the filter operations and see [here](http://metadata.fragilefamilies.princeton.edu/about) for an explanation of the resulting metadata.
+We also wrap the ffmetadata API for our own use in feature development. The metadata API returns more detailed metadata than is available in the codebook. See [here](https://github.com/fragilefamilieschallenge/metadata_app/blob/master/README.md#filter-specification) for details on the filter operations and see [here](http://metadata.fragilefamilies.princeton.edu/about) for an explanation of the resulting metadata.
 
 ```python
 import fragile_families.analysis.metadata as metadata
@@ -137,6 +154,8 @@ metadata.info('m1a4')
 metadata.search({'name': 'label', 'op': 'like', 'val': '%school%'})
 # can use metadata.searchinfo to combine the two methods
 ```
+
+> :bangbang: The metadata search shows results from the most up-to-date metadata available. In some cases, this reflects changes since the 2017 challenge, so variables that appear in metadata search may not appear in the dataset and vice-versa.
 
 ## Feature validation
 
