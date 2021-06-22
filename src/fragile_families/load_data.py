@@ -90,4 +90,4 @@ def load_codebook() -> pd.DataFrame:
     config = load_config()
     bucket = config.data.tables.s3_bucket
     path = f's3://{bucket}/metadata/codebook.json'
-    return pd.read_json(path, orient='records').set_index('code')
+    return pd.read_json(path, orient='records').set_index('code').sort_index()
