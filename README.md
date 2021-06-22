@@ -127,13 +127,14 @@ Predictor variables are identified by a *prefix* and a *question number*. Prefix
 
 1. The prefix c in front of any variable indicates variables constructed from other responses. For instance, `cm4b_age` is `c`onstructed from the `m`other wave `4` interview, and captures the child's age (`b`aby's `a`ge).
 1. `m1`, `m2`, `m3`, `m4`, `m5`: Questions asked of the child's `m`other in wave `1` through wave `5`.
-1. `f1`, ..., `f5`: Questions asked of the child's `f`ather in wave `1` through wave `5`
+1. `f1`, `f2`, `f3`, `f4`, `f5`: Questions asked of the child's `f`ather in wave `1` through wave `5`
 1. `hv3`, `hv4`, `hv5`: Questions asked in the `h`ome `v`isit in waves `3`, `4`, and `5`.
-1. `p5`: Questions asked of the `p`rimary caregiver in wave 5.
-1. `k5`: Questions asked of the child (`k`id) in wave 5
+1. `p5`: Questions asked of the `p`rimary caregiver in wave `5`.
+1. `k5`: Questions asked of the child (`k`id) in wave `5`
 1. `ffcc`: Questions asked in various `c`hild `c`are provider surveys in wave 3
-1. `kind`: Questions asked of the `kind`ergarten teacher
+1. `kind`: Questions asked of the `kind`ergarten teacher in wave 4
 1. `t5`: Questions asked of the `t`eacher in wave `5`.
+1. `n5`: Questions asked of the `n`on-parental caregiver in wave `5`
 
 ### Full codebook
 
@@ -155,7 +156,15 @@ metadata.search({'name': 'label', 'op': 'like', 'val': '%school%'})
 # can use metadata.searchinfo to combine the two methods
 ```
 
-> :bangbang: The metadata search shows results from the most up-to-date metadata available. In some cases, this reflects changes since the 2017 challenge, so variables that appear in metadata search may not appear in the dataset and vice-versa.
+#### Metadata search changes
+
+The metadata search shows results from the most up-to-date metadata available. In some cases, this reflects changes since the 2017 challenge, so variables that appear in metadata search may not appear in the dataset and vice-versa.
+
+For example, `kind_a2` was renamed to `t4a2`. If you use `metadata.info('kind_a2')` you will get an error. Instead, you would have to look at the `old_name` attribute:
+
+```python
+metadata.searchinfo({'name': 'old_name', 'op': 'eq', 'val': 'kind_a2'})
+```
 
 ## Feature validation
 
