@@ -76,7 +76,7 @@ def load_data(
 def load_background() -> pd.DataFrame:
     """Load all background data as a single dataframe"""
     config = load_config()
-    bucket = config.data.tables.s3_bucket
+    bucket = config.data.s3_bucket
     path = f's3://{bucket}/raw/background.csv.gz'
     return pd.read_csv(path, compression='gzip', index_col='challengeID')
 
@@ -88,6 +88,6 @@ def load_codebook() -> pd.DataFrame:
         https://www.fragilefamilieschallenge.org/machine-readable-fragile-families-codebook/
     """  # noqa
     config = load_config()
-    bucket = config.data.tables.s3_bucket
+    bucket = config.data.s3_bucket
     path = f's3://{bucket}/metadata/codebook.json'
     return pd.read_json(path, orient='records').set_index('code').sort_index()
