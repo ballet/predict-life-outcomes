@@ -29,8 +29,9 @@ def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
     for var in tqdm(variables):
         records.append(_select(var))
     result = pd.DataFrame.from_records(records)
-    for col in ['probe', 'qtext']:
-        result[col] = result[col].apply(clean_garbage_chars)
+    if not result.empty:
+        for col in ['probe', 'qtext']:
+            result[col] = result[col].apply(clean_garbage_chars)
     return result
 
 
