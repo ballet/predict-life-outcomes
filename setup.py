@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 requirements = [
-    'ballet[all]==0.19.1',
+    'ballet[all]==0.19.2',
     'pyarrow',
     'fsspec[s3]',
 ]
