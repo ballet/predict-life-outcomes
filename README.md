@@ -158,13 +158,11 @@ metadata.search({'name': 'label', 'op': 'like', 'val': '%school%'})
 
 #### Metadata search changes
 
-The metadata search shows results from the most up-to-date metadata available. In some cases, this reflects changes since the 2017 challenge, so variables that appear in metadata search may not appear in the dataset and vice-versa.
+The metadata search shows results from the most up-to-date metadata available. In some cases, this reflects changes since the 2017 challenge, so variables that appear in metadata search may not appear in the dataset and vice-versa. In this case, the renamed variable's `old_name` attribute is set to the previous name.
 
-For example, `kind_a2` was renamed to `t4a2`. If you use `metadata.info('kind_a2')` you will get an error. Instead, you would have to look at the `old_name` attribute:
+For example, `kind_a2` was renamed to `t4a2`.
 
-```python
-metadata.searchinfo({'name': 'old_name', 'op': 'eq', 'val': 'kind_a2'})
-```
+If `metadata.info` method receives an error from the metadata API due to a missing variable, it will automatically retry by first searching for a variable with that old name and then getting info for that old variable. You can disable this behavior with `retry_with_old_name=False`.
 
 ## Feature validation
 

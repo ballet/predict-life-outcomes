@@ -3,22 +3,38 @@ from typing import Collection, Dict, List, Optional, Union
 
 import ff
 import pandas as pd
-from funcy import memoize
+from funcy import first, memoize
 from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
 
 @memoize
-def _select(var):
-    return ff.select(var)
+def _select(var: str, retry_with_old_name=True) -> dict:
+    try:
+        return ff.select(var)
+    except Exception as e:
+        if 'Invalid variable name' in str(e):
+            if retry_with_old_name:
+                new_name = _find_new_name(var)
+                if new_name:
+                    return _select(new_name, retry_with_old_name=False)
+        raise ValueError(f'Error in getting metadata for {var!r}') from e
+
+
+def _find_new_name(var: str) -> Optional[str]:
+    matches = search({'name': 'old_name', 'op': 'eq', 'val': var})
+    return first(matches)
 
 
 def clean_garbage_chars(s: Optional[str]) -> Optional[str]:
     return ''.join(c for c in s if c.isascii()) if s else s
 
 
-def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
+def info(
+    variables: Union[str, Collection[str]],
+    retry_with_old_name=True
+) -> pd.DataFrame:
     """Get metadata on each variable
 
     An explanation of the resulting metadata can be found here: http://metadata.fragilefamilies.princeton.edu/about
@@ -27,7 +43,7 @@ def info(variables: Union[str, Collection[str]]) -> pd.DataFrame:
         variables = [variables]
     records = []
     for var in tqdm(variables):
-        records.append(_select(var))
+        records.append(_select(var, retry_with_old_name=retry_with_old_name))
     result = pd.DataFrame.from_records(records)
     if not result.empty:
         for col in ['probe', 'qtext']:
