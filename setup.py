@@ -4,6 +4,8 @@ requirements = [
     'ballet[all]==0.19.2',
     'pyarrow',
     'fsspec[s3]',
+    'mlblocks',
+    'scikit-learn',
 ]
 
 extras = {
@@ -13,6 +15,9 @@ extras = {
         'pandas',
         'tqdm',
     ],
+    'evaluation': [
+        'timer_cm',
+    ]
 }
 
 setup(
