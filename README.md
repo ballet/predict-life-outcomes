@@ -1,6 +1,6 @@
 [![ballet](https://img.shields.io/static/v1?label=built%20with&message=ballet&color=FCDD35)](https://ballet.github.io)
 <a href="https://mybinder.org/v2/gh/HDI-Project/ballet-fragile-families/master?urlpath=lab" target="_blank" rel="nofollow"><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
-[![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)](https://join.slack.com/share/zt-r6u5ohtf-V40eunINB56ZD2Qd3b1L1w)
+[![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)][slack-invite-link]
 [![Join the chat at https://gitter.im/ballet-project/fragile-families](https://badges.gitter.im/ballet-project/fragile-families.svg)](https://gitter.im/ballet-project/fragile-families?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Fragile Families Collaboration
@@ -164,7 +164,17 @@ For example, `kind_a2` was renamed to `t4a2`.
 
 If `metadata.info` method receives an error from the metadata API due to a missing variable, it will automatically retry by first searching for a variable with that old name and then getting info for that old variable. You can disable this behavior with `retry_with_old_name=False`.
 
-## Feature validation
+## Feature development
+
+### Feature development partitions
+
+A *feature development partition* describes a set of inputs for a data scientist to focus on in engineering features in this project. For example, the set of all questions asked during Wave 1 of the survey is a partition.
+
+If you'd like to focus your effort in feature development, check out the existing partitions, which are [tracked in issues under the feature-partition label](https://github.com/HDI-Project/ballet-fragile-families/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-partition). Comment on the issue with the response `me` to "claim" it. It's okay for multiple people to claim one partition, but in that case, make sure you stay in touch directly or via the project chat, or follow each other's accepted (and rejected) feature contributions.
+
+If you'd like to suggest a new partition, see [#31](https://github.com/HDI-Project/ballet-fragile-families/issues/31).
+
+### Feature validation
 
 In this project, feature contributions are [validated](https://ballet.github.io/ballet/contributor_guide.html#understanding-validation-results) to ensure that they are positively contributing to our shared feature engineering pipeline. One part of this validation is called "feature acceptance" validation, that is, does the performance of our ML pipeline improve when the new feature is added? We run the feature through two feature accepters: the [`MutualInformationAccepter`](https://ballet.github.io/ballet/api/ballet.validation.feature_acceptance.validator.html#ballet.validation.feature_acceptance.validator.MutualInformationAccepter) and the [`VarianceThresholdAccepter`](https://ballet.github.io/ballet/api/ballet.validation.feature_acceptance.validator.html#ballet.validation.feature_acceptance.validator.VarianceThresholdAccepter). Based on the parameters set in our [ballet.yml](ballet.yml#L17) configuration file, a feature definition is accepted if it meets two criteria:
 
@@ -175,7 +185,7 @@ In this project, feature contributions are [validated](https://ballet.github.io/
 
 Want to chat about the project, compare ideas, or debug features with other collaborators? Join either of our two chat rooms:
 
-* Slack: [![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)](https://join.slack.com/share/zt-r6u5ohtf-V40eunINB56ZD2Qd3b1L1w) (forgive me if the invite link is ever temporarily expired)
+* Slack: [![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)][slack-invite-link] (forgive me if the invite link is ever temporarily expired)
 * Gitter: [![Join the chat at https://gitter.im/ballet-project/fragile-families](https://badges.gitter.im/ballet-project/fragile-families.svg)](https://gitter.im/ballet-project/fragile-families?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 If you think a question might have been answered before, check out the [Ballet FAQ](https://ballet.github.io/ballet/faq.html).
@@ -203,3 +213,6 @@ If you think you found a bug with Ballet, please [open an issue](https://github.
     1. [Material hardship](https://www.fragilefamilieschallenge.org/material-hardship/)
     1. [Grit](https://www.fragilefamilieschallenge.org/grit/)
     1. [GPA](https://www.fragilefamilieschallenge.org/gpa/)
+
+
+[slack-invite-link]: https://join.slack.com/share/zt-sb6qhf5g-_pS5nY9L4bLo24A_trqdOQ
