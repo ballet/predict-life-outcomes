@@ -41,6 +41,19 @@ def savefig(fig, name: str, figdir: str):
             str(figdir / (name + ext)), bbox_inches='tight', pad_inches=0)
 
 
+def savetable(
+    df, name: str, tabledir: str, csv_kwargs=None, latex_kwargs=None
+):
+    if csv_kwargs is None:
+        csv_kwargs = {}
+    if latex_kwargs is None:
+        latex_kwargs = {}
+    latex_kwargs.setdefault('float_format', '{:0.3f}'.format)
+    tabledir = Path(tabledir)
+    df.to_csv(tabledir / f'{name}.csv', **csv_kwargs)
+    df.to_latex(tabledir / f'{name}_tabular.tex', **latex_kwargs)
+
+
 def camelcase(s: str, sep='_'):
     parts = s.split(sep)
     parts = [part.title() for part in parts]
@@ -120,3 +133,36 @@ SCORERS = [
     mean_squared_error,
     r2_holdout,
 ]
+
+
+def name_scorer(scorer):
+    return scorer.__name__ or 'unknown'
+
+
+def name_scorer_fancy(scorer):
+    name = name_scorer(scorer)
+
+    if name == 'r2_holdout':
+        return r'$R^2_{\text{Holdout}}$'
+
+    if name == 'mean_squared_error':
+        return 'MSE'
+
+    return name
+
+
+def move_column(df, name, index=0, before=None, after=None):
+    if name not in df.columns:
+        raise ValueError(f'Column {name!r} not in DataFrame')
+
+    df = df.copy()
+    col = df[name]
+    del df[name]
+
+    if before is not None:
+        index = list(df.columns).index(before)
+    elif after is not None:
+        index = list(df.columns).index(after) + 1
+
+    df.insert(index, name, col)
+    return df
