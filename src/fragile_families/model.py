@@ -7,6 +7,13 @@ add_primitives_path(Path(__file__).parents[2].joinpath('blocks', 'primitives'))
 add_pipelines_path(Path(__file__).parents[2].joinpath('blocks', 'pipelines'))
 
 
-def load_pipeline(name: str = 'ballet_rf_regressor') -> MLPipeline:
-    pipeline_info = _load_pipeline(name)
-    return MLPipeline(pipeline_info)
+PIPELINES = [
+    'ballet_rf_regressor',
+]
+DEFAULT_PIPELINE = 'ballet_rf_regressor'
+
+
+def load_pipeline(name: str = DEFAULT_PIPELINE) -> MLPipeline:
+    if name not in PIPELINES:
+        raise ValueError(f'Pipeline {name!r} is not supported')
+    return MLPipeline(_load_pipeline(name))
