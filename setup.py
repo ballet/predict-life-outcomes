@@ -17,6 +17,11 @@ extras = {
     ],
     'evaluation': [
         'timer_cm',
+    ],
+    'search': [
+        'dill',
+        'baytune',
+        'stacklog',
     ]
 }
 

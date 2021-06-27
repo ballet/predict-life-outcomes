@@ -107,3 +107,6 @@ ENV/
 
 # data files
 *.pkl
+
+# evaluation data files
+evaluation/data/
