@@ -1,9 +1,12 @@
 import logging
+from collections import defaultdict
+from functools import wraps
 from pathlib import Path
 from typing import Tuple
 
 from ballet import b
 from mlblocks import MLPipeline
+import numpy as np
 from sklearn.metrics import mean_squared_error
 from timer_cm import Timer as _Timer
 
@@ -15,15 +18,26 @@ except ImportError:
 logger = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parents[3].joinpath('evaluation')
 SPLITS = ('train', 'leaderboard', 'test')
-TRAIN_MSE = {
-    'materialHardship': 0.025,
-    'gpa': 0.425,
-    'grit': 0.253,
-    'eviction': 0.056,
-    'layoff': 0.167,
-    'jobTraining': 0.185,
+TRAIN_MEAN = {
+    'gpa': 2.866738,
+    'grit': 3.427539,
+    'materialHardship': 0.10374478160633066,
+    'eviction': 0.059630,
+    'layoff': 0.209084,
+    'jobTraining': 0.234771,
 }
-TARGETS = list(TRAIN_MSE.keys())
+TARGETS = list(TRAIN_MEAN.keys())
+
+
+def box():
+    return defaultdict(box)
+
+
+def unbox(box):
+    result = {}
+    for k, v in box.items():
+        result[k] = unbox(v) if isinstance(v, defaultdict) else v
+    return result
 
 
 def set_style():
@@ -86,11 +100,14 @@ class Timer(_Timer):
         return result
 
 
-def evaluate(pipeline: MLPipeline, split='leaderboard'):
+def evaluate(pipeline: MLPipeline, splits=None):
+    if splits is None:
+        splits = SPLITS
     encoder = b.api.encoder
-    data = {split: {} for split in SPLITS}
-    for split in SPLITS:
+    data = defaultdict(dict)
+    for split in splits:
         data[split]['X_df'], data[split]['y_df'] = b.api.load_data(split=split)
+    data = unbox(data)
     return _evaluate(pipeline, encoder, data, SCORERS)
 
 
@@ -100,7 +117,7 @@ def _evaluate(pipeline, encoder, data, scorers) -> Tuple[MLPipeline, dict]:
             pipeline.fit(data['train']['X_df'], data['train']['y_df'])
             encoder.fit(data['train']['y_df'])
 
-        scores = {split: {} for split in SPLITS}
+        scores = box()
 
         for split in SPLITS:
             split_timer = timer.child(split)
@@ -109,16 +126,15 @@ def _evaluate(pipeline, encoder, data, scorers) -> Tuple[MLPipeline, dict]:
                     y_pred = pipeline.predict(data[split]['X_df'])
                 y = encoder.transform(data[split]['y_df'])
                 with split_timer.child('score'):
-                    for scorer in scorers:
-                        name = scorer.__name__ or 'unknown'
-                        if name != 'r2_holdout':
-                            scores[split][name] = scorer(y, y_pred)
+                    for scorer_name, scorer in scorers.items():
+                        if scorer_name != 'r2_holdout':
+                            scores[split][scorer_name] = scorer(y, y_pred)
                         else:
-                            scores[split][name] = \
+                            scores[split][scorer_name] = \
                                 scorer(y, y_pred, 'materialHardship')
 
     results = {
-        'scores': scores,
+        'scores': unbox(scores),
         'timing': timer.details(),
     }
 
@@ -126,29 +142,30 @@ def _evaluate(pipeline, encoder, data, scorers) -> Tuple[MLPipeline, dict]:
 
 
 def r2_holdout(y, y_pred, target):
-    return 1.0 - mean_squared_error(y, y_pred) / TRAIN_MSE[target]
+    return 1.0 - mean_squared_error(y, y_pred) / mean_squared_error(
+        y, np.full_like(y, TRAIN_MEAN[target]))
 
 
-SCORERS = [
-    mean_squared_error,
-    r2_holdout,
-]
+def skipna(func):
+
+    @wraps(func)
+    def wrapped(y, y_pred, *args, **kwargs):
+        inds = ~np.isnan(y)
+        y = y[inds]
+        y_pred = y_pred[inds]
+        return func(y, y_pred, *args, **kwargs)
+
+    return wrapped
 
 
-def name_scorer(scorer):
-    return scorer.__name__ or 'unknown'
-
-
-def name_scorer_fancy(scorer):
-    name = name_scorer(scorer)
-
-    if name == 'r2_holdout':
-        return r'$R^2_{\text{Holdout}}$'
-
-    if name == 'mean_squared_error':
-        return 'MSE'
-
-    return name
+SCORERS = {
+    'mean_squared_error': skipna(mean_squared_error),
+    'r2_holdout': skipna(r2_holdout),
+}
+SCORER_FANCY_NAMES = {
+    'mean_squared_error': 'MSE',
+    'r2_holdout': r'$R^2_{\text{Holdout}}$',
+}
 
 
 def move_column(df, name, index=0, before=None, after=None):
