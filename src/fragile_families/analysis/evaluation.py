@@ -94,7 +94,7 @@ class Timer(_Timer):
         elapsed = self.elapsed or sum(c.elapsed for c in children)
         if not self._children:
             return {self._name: float(elapsed)}
-        result = {self._name: {'total': float(elapsed),}}
+        result = {self._name: {'total': float(elapsed)}}
         for child in children:
             result[self._name].update(child.details())
         return result

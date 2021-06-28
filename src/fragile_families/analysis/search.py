@@ -126,8 +126,8 @@ def unflatten(doc: dict, sep: str = '.'):
 )
 @click.option(
     '-o', '--output',
-    default=lambda: \
-        DEFAULT_SEARCH_OUTPUT / f'search-{datetime.now():%Y-%m-%d-%H-%M}',
+    default=lambda: DEFAULT_SEARCH_OUTPUT.joinpath(
+        f'search-{datetime.now():%Y-%m-%d-%H-%M}'),
     help='Output directory for session results',
     type=Path,
 )
