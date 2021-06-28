@@ -11,13 +11,52 @@ from btb.tuning import GCPTuner, Tunable
 from mlblocks import MLPipeline
 from stacklog import stacklog, stacktime
 
-from fragile_families.analysis.evaluation import ROOT, r2_holdout
+from fragile_families.analysis.evaluation import ROOT, SCORERS
 from fragile_families.api import api
 from fragile_families.model import PIPELINES, load_pipeline
 
 SEP = '__'
 TARGET = 'materialHardship'
 DEFAULT_SEARCH_OUTPUT = ROOT.joinpath('data', 'output', 'search')
+BTB_SESSION_MAX_ERRORS = 10
+r2_holdout = SCORERS['r2_holdout']
+
+
+class SessionManager:
+
+    def __init__(self, session: BTBSession, output: Path = None):
+        self.session = session
+        if output is None:
+            self.output = DEFAULT_SEARCH_OUTPUT.joinpath(
+                    f'search-{datetime.now():%Y-%m-%d-%H-%M}')
+        else:
+            self.output = output
+
+    def save(self):
+        sessionpath = self.output.joinpath('session.pkl')
+        with stacklog(print, f'Dumping session to {sessionpath}'):
+            with sessionpath.open('wb') as f:
+                pickle.dump(self.session, f)
+
+    @classmethod
+    def load(cls, name):
+        sessionpath = DEFAULT_SEARCH_OUTPUT.joinpath(name, 'session.pkl')
+
+        with stacklog(print, f'Loading session from {sessionpath}'):
+            with sessionpath.open('rb') as f:
+                return cls(pickle.load(f))
+
+    @classmethod
+    def latest(cls):
+        latest_search = max(DEFAULT_SEARCH_OUTPUT.glob('search-*'))
+        return cls.load(latest_search.name)
+
+    def best(self) -> MLPipeline:
+        proposal = self.session.best_proposal
+        pipeline = load_pipeline(proposal['name'])
+        params = proposal['config']
+        pipeline.set_hyperparameters(unflatten(params, sep=SEP))
+        return pipeline
 
 
 def get_tunables(pipelines: Dict[str, MLPipeline]):
@@ -116,7 +155,10 @@ def main(budget: int, output: Path):
         entities_tr, targets_tr, y_tr,
         entities_te, targets_te, y_te,
     )
-    session = BTBSession(tunables, scorer, tuner_class=GCPTuner, verbose=True)
+    session = BTBSession(
+        tunables, scorer,
+        tuner_class=GCPTuner, max_errors=BTB_SESSION_MAX_ERRORS, verbose=True
+    )
 
     with stacktime(print, f'Running session for {budget} iterations'):
         session.run(budget)
