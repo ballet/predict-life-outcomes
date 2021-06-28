@@ -16,6 +16,7 @@ extras = {
         'tqdm',
     ],
     'evaluation': [
+        'python-dotenv',
         'timer_cm',
     ],
     'search': [
