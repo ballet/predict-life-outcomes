@@ -115,12 +115,16 @@
                 "default": 0.0,
                 "range": [
                     0.0,
-                    100.0
+                    0.5
                 ]
             },
             "max_leaf_nodes": {
                 "type": "int",
-                "default": null
+                "default": null,
+                "range": [
+                    2,
+                    1000
+                ]
             },
             "min_impurity_decrease": {
                 "type": "float",
@@ -129,14 +133,6 @@
                     0.0,
                     10.0
                 ]
-            },
-            "bootstrap": {
-                "type": "bool",
-                "default": true
-            },
-            "oob_score": {
-                "type": "bool",
-                "default": false
             }
         }
     }

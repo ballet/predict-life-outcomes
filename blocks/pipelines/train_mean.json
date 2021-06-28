@@ -1,0 +1,12 @@
+{
+    "metadata": {
+        "name": "train_mean",
+        "data_type": "single_table",
+        "task_type": "regression"
+    },
+    "primitives": [
+        "ballet.encode_target",
+        "ballet.drop_missing_targets",
+        "sklearn.dummy.DummyRegressor"
+    ]
+}

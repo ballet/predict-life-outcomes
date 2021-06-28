@@ -1,0 +1,18 @@
+{
+    "metadata": {
+        "name": "train_mean",
+        "data_type": "single_table",
+        "task_type": "regression"
+    },
+    "primitives": [
+        "ballet.encode_target",
+        "ballet.drop_missing_targets",
+        "sklearn.dummy.DummyRegressor"
+    ],
+    "init_params": {
+        "sklearn.dummy.DummyRegressor#1": {
+            "strategy": "constant",
+            "constant": 0.117839
+        }
+    }
+}

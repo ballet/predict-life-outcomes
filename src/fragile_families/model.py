@@ -9,6 +9,9 @@ add_pipelines_path(Path(__file__).parents[2].joinpath('blocks', 'pipelines'))
 
 PIPELINES = [
     'ballet_rf_regressor',
+    'ballet_elasticnet',
+    'train_mean',
+    'leaderboard_mean',
 ]
 DEFAULT_PIPELINE = 'ballet_rf_regressor'
 

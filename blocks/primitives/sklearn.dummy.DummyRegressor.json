@@ -1,0 +1,58 @@
+{
+    "name": "sklearn.dummy.DummyRegressor",
+    "contributors": [
+        "Micah Smith <micahs@mit.edu>"
+    ],
+    "documentation": "https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyRegressor.html",
+    "classifiers": {
+        "type": "estimator",
+        "subtype": "regressor"
+    },
+    "modalities": [],
+    "primitive": "sklearn.dummy.DummyRegressor",
+    "fit": {
+        "method": "fit",
+        "args": [
+            {
+                "name": "X",
+                "type": "ndarray"
+            },
+            {
+                "name": "y",
+                "type": "ndarray"
+            }
+        ]
+    },
+    "produce": {
+        "method": "predict",
+        "args": [
+            {
+                "name": "X",
+                "type": "ndarray"
+            }
+        ],
+        "output": [
+            {
+                "name": "y",
+                "type": "ndarray"
+            }
+        ]
+    },
+    "hyperparameters": {
+        "fixed": {
+            "strategy": {
+                "type": "str",
+                "default": "mean",
+                "values": [
+                    "mean",
+                    "median",
+                    "constant"
+                ]
+            },
+            "constant": {
+                "type": "float",
+                "default": null
+            }
+        }
+    }
+}
