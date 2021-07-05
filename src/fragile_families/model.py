@@ -12,6 +12,7 @@ PIPELINES = [
     'ballet_elasticnet',
     'train_mean',
     'leaderboard_mean',
+    'test_mean',
 ]
 DEFAULT_PIPELINE = 'ballet_rf_regressor'
 
