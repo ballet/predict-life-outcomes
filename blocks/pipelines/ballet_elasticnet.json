@@ -6,7 +6,7 @@
     },
     "primitives": [
         "ballet.engineer_features",
-        "ballet.encode_target",
+        "fragile_families.encode_target",
         "ballet.drop_missing_targets",
         "sklearn.linear_model.ElasticNet"
     ]

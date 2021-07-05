@@ -5,7 +5,7 @@
         "task_type": "regression"
     },
     "primitives": [
-        "ballet.encode_target",
+        "fragile_families.encode_target",
         "ballet.drop_missing_targets",
         "sklearn.dummy.DummyRegressor"
     ]
