@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "name": "train_mean",
+        "name": "leaderboard_mean",
         "data_type": "single_table",
         "task_type": "regression"
     },
