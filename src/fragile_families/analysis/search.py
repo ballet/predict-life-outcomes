@@ -71,15 +71,15 @@ def get_tunables(pipelines: Dict[str, MLPipeline]):
 def make_scorer(
     pipelines: Dict[str, MLPipeline],
     entities_tr, targets_tr, y_tr,
-    entities_te, targets_te, y_te,
+    entities_le, targets_le, y_le,
 ) -> Callable[[str, Dict], float]:
 
     def scorer(name, params):
         pipeline = pipelines[name]
         pipeline.set_hyperparameters(unflatten(params, sep=SEP))
         pipeline.fit(entities_tr, targets_tr)
-        y_pred_te = pipeline.predict(entities_te)
-        score = r2_holdout(y_te, y_pred_te, TARGET)
+        y_pred_le = pipeline.predict(entities_le)
+        score = r2_holdout(y_le, y_pred_le, TARGET)
         return score
 
     return scorer
@@ -145,15 +145,15 @@ def main(budget: int, output: Path):
     encoder = api.encoder
     with stacktime(print, 'Loading and encoding data'):
         entities_tr, targets_tr = api.load_data(split='train')
-        entities_te, targets_te = api.load_data(split='leaderboard')
+        entities_le, targets_le = api.load_data(split='leaderboard')
         y_tr = encoder.fit_transform(targets_tr)
-        y_te = encoder.transform(targets_te)
+        y_le = encoder.transform(targets_le)
 
     tunables = get_tunables(pipelines)
     scorer = make_scorer(
         pipelines,
         entities_tr, targets_tr, y_tr,
-        entities_te, targets_te, y_te,
+        entities_le, targets_le, y_le,
     )
     session = BTBSession(
         tunables, scorer,
