@@ -19,7 +19,9 @@ class TargetSelector(BaseTransformer):
     def __init__(self, default_target: Optional[str] = None):
         self.default_target = default_target
 
-    def fit(self, y, target: Optional[str] = None):
+    def fit(self, X, y=None, target: Optional[str] = None):
+        # FIXME needs X, y signature for _validate_transformer_api
+
         if target is not None:
             self.target_ = target
         elif self.default_target is not None:
@@ -29,8 +31,10 @@ class TargetSelector(BaseTransformer):
 
         return self
 
-    def transform(self, y):
-        return y[self.target_]
+    def transform(self, X):
+        # FIXME needs X signature for _validate_transformer_api
+
+        return X[self.target_]
 
 
 def get_target_encoder():
