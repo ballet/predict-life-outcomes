@@ -1,0 +1,38 @@
+{
+    "name": "fragile_families.encode_target",
+    "contributors": [
+        "Micah Smith <micahs@mit.edu>"
+    ],
+    "documentation": "",
+    "description": "Applies the target encoder from the ballet-fragile-families project",
+    "classifiers": {
+        "type": "preprocessor",
+        "subtype": "data_cleanup"
+    },
+    "modalities": [],
+    "primitive": "fragile_families.features.encoder.get_target_encoder",
+    "produce": {
+        "method": "transform",
+        "args": [
+            {
+                "name": "y",
+                "default": null,
+                "type": "pandas.DataFrame"
+            }
+        ],
+        "output": [
+            {
+                "name": "y",
+                "type": "ndarray"
+            }
+        ]
+    },
+    "hyperparameters": {
+        "fixed": {
+            "target": {
+                "type": "str",
+                "default": "materialHardship"
+            }
+        }
+    }
+}

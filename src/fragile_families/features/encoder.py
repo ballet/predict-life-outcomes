@@ -1,46 +1,21 @@
-from typing import Optional
-
 from ballet.eng import BaseTransformer
 
 
 class TargetSelector(BaseTransformer):
-    """Target encoder for multi-target data to select one target at train time
-
-    Can specify the desired target column either in the constructor or in the
-    fit method kwargs. This is needed because within a pipeline, there is
-    currently no ability to pass parameters to the constructor (the culprit is
-    that the api.encoder object is obtained from calling get_target_encoder
-    with no argument).
-
-    At fit time, the target column is computed. At transform time, the target
-    column is selected from the targets dataframe.
+    """Target encoder for multi-target data to select one target at predict time
     """
 
-    def __init__(self, default_target: Optional[str] = None):
-        self.default_target = default_target
+    def __init__(self, target: str):
+        self.target = target
 
-    def fit(self, X, y=None, target: Optional[str] = None):
-        # FIXME needs X, y signature for _validate_transformer_api
-
-        if target is not None:
-            self.target_ = target
-        elif self.default_target is not None:
-            self.target_ = self.default_target
-        else:
-            raise ValueError('Need to specify either target or default_target')
-
-        return self
-
-    def transform(self, X):
-        # FIXME needs X signature for _validate_transformer_api
-
-        return X[self.target_]
+    def transform(self, y):
+        return y[self.target] if y is not None else None
 
 
-def get_target_encoder():
+def get_target_encoder(target='materialHardship'):
     """Get encoder for the prediction target
 
     Returns:
         transformer-like
     """
-    return TargetSelector(default_target='materialHardship')
+    return TargetSelector(target)
