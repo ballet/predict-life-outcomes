@@ -15,7 +15,7 @@ from stacklog import stacklog, stacktime
 from fragile_families.analysis.evaluation import ROOT, SCORERS
 from fragile_families.api import api
 from fragile_families.model import (
-    DEFAULT_TARGET, PIPELINES, TARGETS, get_encoder_from_pipeline,
+    DEFAULT_TARGET, PIPELINES, TARGETS, TARGET_PIPELINES, get_encoder_from_pipeline,
     load_pipeline,)
 
 SEP = '__'
@@ -138,7 +138,7 @@ def search(budget: int, output: Path, target: str):
 
     pipelines = {
         name: load_pipeline(name, target=target)
-        for name in PIPELINES
+        for name in TARGET_PIPELINES[target]
     }
 
     # get the encoder from within any one of the pipelines
