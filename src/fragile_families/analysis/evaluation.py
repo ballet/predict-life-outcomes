@@ -10,6 +10,8 @@ import numpy as np
 from sklearn.metrics import mean_squared_error
 from timer_cm import Timer as _Timer
 
+from fragile_families.features.encoder import TargetSelector
+
 try:
     import seaborn as sns
 except ImportError:
@@ -70,10 +72,10 @@ def savetable(
 
 def camelcase(s: str, sep='_'):
     parts = s.split(sep)
-    parts = [part.title() for part in parts]
-    if parts and parts[0]:
-        parts[0] = parts[0][0].lower() + parts[0][1:]
-    return ''.join(parts)
+    return ''.join([
+        part.title() if i > 0 else part.lower()
+        for i, part in enumerate(parts)
+    ])
 
 
 class Timer(_Timer):
@@ -100,18 +102,22 @@ class Timer(_Timer):
         return result
 
 
-def evaluate(pipeline: MLPipeline, splits=None):
+def evaluate(pipeline: MLPipeline, encoder: TargetSelector, splits=None):
     if splits is None:
         splits = SPLITS
-    encoder = b.api.encoder
+    if 'train' not in splits:
+        splits.insert(0, 'train')
+    target = encoder.target
     data = defaultdict(dict)
     for split in splits:
         data[split]['X_df'], data[split]['y_df'] = b.api.load_data(split=split)
     data = unbox(data)
-    return _evaluate(pipeline, encoder, data, SCORERS)
+    return _evaluate(pipeline, encoder, data, SCORERS, target)
 
 
-def _evaluate(pipeline, encoder, data, scorers) -> Tuple[MLPipeline, dict]:
+def _evaluate(
+    pipeline, encoder, data, scorers, target
+) -> Tuple[MLPipeline, dict]:
     with Timer('evaluate', print_results=False) as timer:
         with timer.child('fit'):
             pipeline.fit(data['train']['X_df'], data['train']['y_df'])
@@ -119,7 +125,7 @@ def _evaluate(pipeline, encoder, data, scorers) -> Tuple[MLPipeline, dict]:
 
         scores = box()
 
-        for split in SPLITS:
+        for split in data:
             split_timer = timer.child(split)
             with split_timer:
                 with split_timer.child('predict'):
@@ -131,7 +137,7 @@ def _evaluate(pipeline, encoder, data, scorers) -> Tuple[MLPipeline, dict]:
                             scores[split][scorer_name] = scorer(y, y_pred)
                         else:
                             scores[split][scorer_name] = \
-                                scorer(y, y_pred, 'materialHardship')
+                                scorer(y, y_pred, target)
 
     results = {
         'scores': unbox(scores),
