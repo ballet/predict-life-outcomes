@@ -23,6 +23,7 @@ extras = {
         'dill',
         'baytune',
         'stacklog',
+        'xgboost',
     ]
 }
 

@@ -1,0 +1,19 @@
+{
+    "metadata": {
+        "name": "ballet_xgboost",
+        "data_type": "single_table",
+        "task_type": "classification"
+    },
+    "primitives": [
+        "ballet.engineer_features",
+        "fragile_families.encode_target",
+        "ballet.drop_missing_targets",
+        "xgboost.XGBClassifier",
+        "fragile_families.squeeze_predicted_probabilities"
+    ],
+    "hyperparameters": {
+        "xgboost.XGBClassifier#1": {
+            "learning_rate": 0.1
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "name": "fragile_families.squeeze_predicted_probabilities",
+    "contributors": [
+        "Micah Smith <micahs@mit.edu>"
+    ],
+    "documentation": "",
+    "description": "Squeeze predicted probabilities",
+    "classifiers": {
+        "type": "preprocessor",
+        "subtype": "data_cleanup"
+    },
+    "modalities": [],
+    "primitive": "fragile_families.features.encoder.squeeze_predicted_probabilities",
+    "produce": {
+        "args": [
+            {
+                "name": "y",
+                "type": "ndarray"
+            }
+        ],
+        "output": [
+            {
+                "name": "y",
+                "type": "ndarray"
+            }
+        ]
+    }
+}

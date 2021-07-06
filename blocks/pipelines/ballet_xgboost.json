@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "name": "ballet_elasticnet",
+        "name": "ballet_xgboost",
         "data_type": "single_table",
         "task_type": "regression"
     },
@@ -8,6 +8,11 @@
         "ballet.engineer_features",
         "fragile_families.encode_target",
         "ballet.drop_missing_targets",
-        "sklearn.linear_model.ElasticNet"
-    ]
+        "xgboost.XGBRegressor"
+    ],
+    "hyperparameters": {
+        "xgboost.XGBRegressor#1": {
+            "learning_rate": 0.1
+        }
+    }
 }

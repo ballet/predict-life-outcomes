@@ -19,3 +19,9 @@ def get_target_encoder(target='materialHardship'):
         transformer-like
     """
     return TargetSelector(target)
+
+
+def squeeze_predicted_probabilities(y):
+    """Return just the predicted probability of the second class"""
+    assert y.shape[1] == 2
+    return y[:, 1]

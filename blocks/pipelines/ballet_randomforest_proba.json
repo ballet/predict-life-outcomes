@@ -1,13 +1,14 @@
 {
     "metadata": {
-        "name": "ballet_elasticnet",
+        "name": "ballet_randomforest",
         "data_type": "single_table",
-        "task_type": "regression"
+        "task_type": "classification"
     },
     "primitives": [
         "ballet.engineer_features",
         "fragile_families.encode_target",
         "ballet.drop_missing_targets",
-        "sklearn.linear_model.ElasticNet"
+        "sklearn.ensemble.RandomForestClassifier",
+        "fragile_families.squeeze_predicted_probabilities"
     ]
 }

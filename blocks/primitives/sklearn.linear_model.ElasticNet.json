@@ -1,7 +1,8 @@
 {
     "name": "sklearn.linear_model.ElasticNet",
     "contributors": [
-        "Hector Dominguez <hedb_12@hotmail.com>"
+        "Hector Dominguez <hedb_12@hotmail.com>",
+        "Micah Smith <micahs@mit.edu>"
     ],
     "documentation": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html",
     "description": "Linear regression with combined L1 and L2 priors as regularizer",
@@ -76,6 +77,21 @@
                     }
                 },
                 "default": null
+            },
+            "max_iter": {
+                "type": "int",
+                "description": "The maximum number of iterations",
+                "default": 1000
+            },
+            "tol": {
+                "type": "float",
+                "description": "The tolerance for the optimization: if the updates are smaller than tol, the optimization code checks the dual gap for optimality and continues until it is smaller than tol",
+                "default": 0.0001
+            },
+            "positive": {
+                "type": "bool",
+                "description": "When set to True, forces the coefficients to be positive",
+                "default": false
             }
         },
         "tunable": {
@@ -101,29 +117,6 @@
                 "type": "bool",
                 "default": false,
                 "description": "This parameter is ignored when fit_intercept is set to False. If True, the regressors X will be normalized before regression by subtracting the mean and dividing by the l2-norm"
-            },
-            "max_iter": {
-                "type": "int",
-                "description": "The maximum number of iterations",
-                "default": 1000,
-                "range": [
-                    1,
-                    10000
-                ]
-            },
-            "tol": {
-                "type": "float",
-                "description": "The tolerance for the optimization: if the updates are smaller than tol, the optimization code checks the dual gap for optimality and continues until it is smaller than tol",
-                "default": 0.0001,
-                "range": [
-                    1e-06,
-                    0.01
-                ]
-            },
-            "positive": {
-                "type": "bool",
-                "description": "When set to True, forces the coefficients to be positive",
-                "default": false
             },
             "selection": {
                 "type": "str",
