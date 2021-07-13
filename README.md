@@ -215,4 +215,4 @@ If you think you found a bug with Ballet, please [open an issue](https://github.
     1. [GPA](https://www.fragilefamilieschallenge.org/gpa/)
 
 
-[slack-invite-link]: https://join.slack.com/share/zt-sb6qhf5g-_pS5nY9L4bLo24A_trqdOQ
+[slack-invite-link]: https://join.slack.com/share/zt-syn0kxab-sTS6RdZsVFhzZ1Ncl~Q2ig
