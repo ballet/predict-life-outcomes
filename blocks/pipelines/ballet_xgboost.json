@@ -10,7 +10,7 @@
         "ballet.drop_missing_targets",
         "xgboost.XGBRegressor"
     ],
-    "hyperparameters": {
+    "init_params": {
         "xgboost.XGBRegressor#1": {
             "learning_rate": 0.1
         }

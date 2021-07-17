@@ -11,7 +11,7 @@
         "xgboost.XGBClassifier",
         "fragile_families.squeeze_predicted_probabilities"
     ],
-    "hyperparameters": {
+    "init_params": {
         "xgboost.XGBClassifier#1": {
             "learning_rate": 0.1
         }
