@@ -18,6 +18,7 @@ extras = {
     'evaluation': [
         'python-dotenv',
         'timer_cm',
+        'matplotlib >= 3.4',  # need to override min dep from copulas
     ],
     'search': [
         'dill',
