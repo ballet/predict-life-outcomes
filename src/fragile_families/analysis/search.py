@@ -2,7 +2,7 @@ import json
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Callable, Dict
+from typing import Callable, Dict, Optional
 
 import click
 import dill as pickle
@@ -26,8 +26,9 @@ r2_holdout = SCORERS['r2_holdout']
 
 class SessionManager:
 
-    def __init__(self, session: BTBSession):
+    def __init__(self, session: BTBSession, target: str):
         self.session = session
+        self.target = target
 
     def save(self, output):
         sessionpath = output.joinpath('session.pkl')
@@ -46,21 +47,24 @@ class SessionManager:
                 json.dump(self.session.best_proposal, f)
 
     @classmethod
-    def load(cls, name):
+    def load(cls, name, target: Optional[str] = None):
         sessionpath = DEFAULT_SEARCH_OUTPUT.joinpath(name, 'session.pkl')
+
+        if target is None:
+            _, target, _ = name.split('-', maxsplit=2)
 
         with stacklog(print, f'Loading session from {sessionpath}'):
             with sessionpath.open('rb') as f:
-                return cls(pickle.load(f))
+                return cls(pickle.load(f), target)
 
     @classmethod
     def latest(cls, target=DEFAULT_TARGET):
         latest_search = max(DEFAULT_SEARCH_OUTPUT.glob(f'search-{target}-*'))
-        return cls.load(latest_search.name)
+        return cls.load(latest_search.name, target=target)
 
     def best(self) -> MLPipeline:
         proposal = self.session.best_proposal
-        pipeline = load_pipeline(proposal['name'])
+        pipeline = load_pipeline(proposal['name'], target=self.target)
         params = proposal['config']
         pipeline.set_hyperparameters(unflatten(params, sep=SEP))
         return pipeline
@@ -169,7 +173,7 @@ def search(budget: int, output: Path, target: str):
     with stacktime(print, f'Running session for {budget} iterations'):
         session.run(budget)
 
-    session_manager = SessionManager(session)
+    session_manager = SessionManager(session, target)
     session_manager.save(output)
 
 
