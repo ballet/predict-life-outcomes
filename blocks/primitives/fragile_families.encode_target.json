@@ -4,7 +4,7 @@
         "Micah Smith <micahs@mit.edu>"
     ],
     "documentation": "",
-    "description": "Applies the target encoder from the ballet-fragile-families project",
+    "description": "Applies the target encoder from the ballet/predict-life-outcomes project",
     "classifiers": {
         "type": "preprocessor",
         "subtype": "data_cleanup"

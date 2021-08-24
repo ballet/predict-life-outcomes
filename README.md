@@ -1,5 +1,5 @@
 [![ballet](https://img.shields.io/static/v1?label=built%20with&message=ballet&color=FCDD35)](https://ballet.github.io)
-<a href="https://mybinder.org/v2/gh/HDI-Project/ballet-fragile-families/master?urlpath=lab" target="_blank" rel="nofollow"><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
+<a href="https://mybinder.org/v2/gh/ballet/predict-life-outcomes/master?urlpath=lab" target="_blank" rel="nofollow"><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
 [![slack](https://img.shields.io/badge/Slack-Join%20Channel-36C5F0?logo=slack)][slack-invite-link]
 [![Join the chat at https://gitter.im/ballet-project/fragile-families](https://badges.gitter.im/ballet-project/fragile-families.svg)](https://gitter.im/ballet-project/fragile-families?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -24,7 +24,7 @@ Are you interested in joining the collaboration?
     1. Read/skim the [data documentation](#data-documentation).
     1. Skim [additional resources](#additional-resources).
 1. Browse the currently accepted features in the contributed features directory ([`src/fragile_families/features/contrib`](src/fragile_families/features/contrib)).
-1. Launch an interactive Jupyter Lab session to hack on this repository: <a href="https://mybinder.org/v2/gh/HDI-Project/ballet-fragile-families/master?urlpath=lab" target="_blank" rel="nofollow" ><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
+1. Launch an interactive Jupyter Lab session to hack on this repository: <a href="https://mybinder.org/v2/gh/ballet/predict-life-outcomes/master?urlpath=lab" target="_blank" rel="nofollow" ><img src="https://ballet.github.io/ballet/_static/launch-assemble.svg" style="max-width:100%;"></a>
 
 ## Data access
 
@@ -170,9 +170,9 @@ If `metadata.info` method receives an error from the metadata API due to a missi
 
 A *feature development partition* describes a set of inputs for a data scientist to focus on in engineering features in this project. For example, the set of all questions asked during Wave 1 of the survey is a partition.
 
-If you'd like to focus your effort in feature development, check out the existing partitions, which are [tracked in issues under the feature-partition label](https://github.com/HDI-Project/ballet-fragile-families/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-partition). Comment on the issue with the response `me` to "claim" it. It's okay for multiple people to claim one partition, but in that case, make sure you stay in touch directly or via the project chat, or follow each other's accepted (and rejected) feature contributions.
+If you'd like to focus your effort in feature development, check out the existing partitions, which are [tracked in issues under the feature-partition label](https://github.com/ballet/predict-life-outcomes/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-partition). Comment on the issue with the response `me` to "claim" it. It's okay for multiple people to claim one partition, but in that case, make sure you stay in touch directly or via the project chat, or follow each other's accepted (and rejected) feature contributions.
 
-If you'd like to suggest a new partition, see [#31](https://github.com/HDI-Project/ballet-fragile-families/issues/31).
+If you'd like to suggest a new partition, see [#31](https://github.com/ballet/predict-life-outcomes/issues/31).
 
 ### Feature validation
 
@@ -190,7 +190,7 @@ Want to chat about the project, compare ideas, or debug features with other coll
 
 If you think a question might have been answered before, check out the [Ballet FAQ](https://ballet.github.io/ballet/faq.html).
 
-If you think you found a bug with Ballet, please [open an issue](https://github.com/ballet/ballet/issues/new) and mention that you are working on the ballet-fragile-families project.
+If you think you found a bug with Ballet, please [open an issue](https://github.com/ballet/ballet/issues/new) and mention that you are working on the predict-life-outcomes project.
 
 ## Additional resources
 

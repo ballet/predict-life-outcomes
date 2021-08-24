@@ -25,7 +25,7 @@ def needs_credentials(call):
             msg = (
                 'An error occurred trying to access fragile-families data. '
                 'Access to this dataset is restricted. Make sure you follow ' 'the steps at '
-                'https://github.com/HDI-Project/ballet-fragile-families#data-access'
+                'https://github.com/ballet/predict-life-outcomes#data-access'
                 ' to get access, or ask in the project chat if you are having '
                 'any trouble.'
             )

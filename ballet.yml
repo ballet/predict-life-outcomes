@@ -1,7 +1,7 @@
 version: 0.19.5
 project:
   project_name: Fragile Families Collaboration
-  project_slug: ballet-fragile-families
+  project_slug: predict-life-outcomes
   package_slug: fragile_families
 problem:
   problem_type: regression
@@ -29,7 +29,7 @@ validation:
   feature_pruner: ballet.validation.feature_pruning.validator.NoOpPruner
   split: leaderboard
 github:
-  github_owner: HDI-Project
+  github_owner: ballet
   remote: origin
   pruning_action: no_action
   auto_merge_accepted_features: yes
